@@ -29,7 +29,7 @@ if (!isset($_POST["save"])) {
 
 				$nav_content .= bo3::c2r(
 					[
-						'class' => ($i == 0 ? "active" : null),
+						'class' => ($i == 0 ? "show active" : null),
 						'nr' => $index,
 						'label-name' => $mdl_lang["label"]["name"],
 						'label-description' => $mdl_lang["label"]["description"],

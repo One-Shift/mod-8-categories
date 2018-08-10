@@ -1,4 +1,4 @@
-<?php
+<?phphidden
 
 $cat_obj = new category();
 $cat_obj->setLangId($lg);
@@ -19,12 +19,12 @@ foreach ($categories as $category) {
 			'date-updated-label' => $mdl_lang["label"]["date-updated"],
 			'date-updated' => $category->date_update,
 			'but-view' => $mdl_lang["label"]["but-view"],
-			'hide-but' => $category->nr_sub_cats > 0 ? null : " hidden",
-			'show-but' => $category->nr_sub_cats == 0 ? null : " hidden",
+			'hide-but' => $category->nr_sub_cats > 0 ? null : " d-none",
+			'show-but' => $category->nr_sub_cats == 0 ? null : " d-none",
 			'but-edit' => $mdl_lang["label"]["but-edit"],
 			'but-delete' => $mdl_lang["label"]["but-delete"]
 		],
-		bo3::mdl_load("templates-e/view/table-row.tpl")
+		bo3::mdl_load("templates-e/home/item.tpl")
 	);
 }
 
@@ -36,7 +36,7 @@ $mdl = bo3::c2r(
 		'parent-nr' => $mdl_lang["label"]["parent-nr"],
 		'published' => $mdl_lang["label"]["published"],
 		'date' => $mdl_lang["label"]["date"],
-		'table-body' => $table_items
+		'list' => (!empty($table_items)) ? $table_items : "No results to show"
 	],
 	bo3::mdl_load("templates/home.tpl")
 );
