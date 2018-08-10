@@ -134,7 +134,7 @@ if (!isset($_POST["save"])) {
 
 	$category->setContent($_POST["name"], $_POST["description"]);
 	$category->setCategorySection($_POST["category-type"]);
-	$category->setParentId($_POST["category-parent"]);
+	$category->setParentId(isset($_POST["category-parent"]) ? $_POST["category-parent"] : '-1');
 	$category->setCode($_POST["code"]);
 	$category->setDate($_POST["date"]);
 	$category->setDateUpdate();
