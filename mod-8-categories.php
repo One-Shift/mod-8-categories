@@ -4,10 +4,10 @@ $cfg->mdl = new stdClass();
 $cfg->mdl->name = "Categories";
 $cfg->mdl->folder = "mod-8-categories";
 $cfg->mdl->path = "{$cfg->system->path_bo}/modules/{$cfg->mdl->folder}/";
-$cfg->mdl->version = "0.0.7";
+$cfg->mdl->version = "0.0.9";
 $cfg->mdl->developer = "Marcos Silva";
 $cfg->mdl->contact = "marcos@one-shift.com";
-$cfg->mdl->dbTables = ["categories", "categories_lang"];
+$cfg->mdl->dbTables = ["8_categories", "8_categories_lang"];
 
 // load language for module
 if (file_exists("modules/{$cfg->mdl->folder}/languages/{$lg_s}.ini")) {

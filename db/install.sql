@@ -1,23 +1,36 @@
-INSERT INTO `{c2r-prefix}_modules` (`name`, `folder`, `sort`) VALUES ('{c2r-mod-name}', '{c2r-mod-folder}', 0);
+INSERT INTO `{c2r-prefix}_modules` (`name`, `folder`, `code`) VALUES ('{c2r-mod-name}', '{c2r-mod-folder}', '{\r\n	\"fa-icon\": \"fa-list\",\r\n	\"img\": \"\",\r\n	\"sub-items\": {\r\n		\"List\": {\r\n			\"url\": \"\"\r\n		},\r\n		\"Add category\": {\r\n			\"url\": \"add\"\r\n		}\r\n	},\r\n\"sidebar\": true,\r\n\"dropdown\": false\r\n}');
 
-CREATE TABLE `{c2r-prefix}_categories` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `parent_id` int(11) NOT NULL,
-    `category_section` varchar(255) NOT NULL,
-    `code` text NOT NULL,
-    `sort` int(11) NOT NULL,
-    `user_id` int(11) NOT NULL,
-    `date` datetime NOT NULL,
-    `date_update` datetime NOT NULL,
-    `published` tinyint(1) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `{c2r-prefix}_8_categories` (
+	`id` int(11) NOT NULL,
+	`parent_id` int(11) NOT NULL,
+	`category_section` varchar(255) NOT NULL,
+	`code` text NOT NULL,
+	`sort` int(11) NOT NULL,
+	`user_id` int(11) NOT NULL,
+	`published` tinyint(1) NOT NULL,
+	`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`date_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `{c2r-prefix}_categories_lang` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
-    `category_id` int(11) NOT NULL,
-    `lang_id` int(11) NOT NULL,
-    `title` varchar(255) NOT NULL,
-    `text` text NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `{c2r-prefix}_8_categories_lang` (
+	`id` int(11) NOT NULL,
+	`category_id` int(11) NOT NULL,
+	`lang_id` int(11) NOT NULL,
+	`title` varchar(255) NOT NULL,
+	`text` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `{c2r-prefix}_8_categories`
+	ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `{c2r-prefix}_8_categories_lang`
+	ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `{c2r-prefix}_8_categories`
+	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{c2r-prefix}_8_categories_lang`
+	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
