@@ -1,6 +1,6 @@
 <?phphidden
 
-$cat_obj = new category();
+$cat_obj = new c8_category();
 $cat_obj->setLangId($lg);
 $cat_obj->setParentId($id);
 $categories = $cat_obj->returnChildCategories();

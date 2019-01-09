@@ -10,7 +10,7 @@ if (!isset($_POST["save"])) {
 		$nav_content = null;
 
 		// Return all category info
-		$category_obj = new category();
+		$category_obj = new c8_category();
 		$category_obj->setId($id);
 		$category_result = $category_obj->returnOneCategoryAllLanguages();
 
@@ -45,7 +45,7 @@ if (!isset($_POST["save"])) {
 			}
 		}
 
-		$category = new category();
+		$category = new c8_category();
 		$category->setLangId(1);
 		$category = $category->returnAllCategories();
 
@@ -54,7 +54,7 @@ if (!isset($_POST["save"])) {
 		function recursiveWayGet($id, $i){
 			global $parent_options, $option_item_tpl, $category_result;
 
-			$a = new category();
+			$a = new c8_category();
 			$a->setLangId(1);
 			$a->setParentId($id);
 			$a = $a->returnChildCategories();
@@ -78,7 +78,7 @@ if (!isset($_POST["save"])) {
 			}
 		}
 
-		$mainCategories = new category();
+		$mainCategories = new c8_category();
 		$mainCategories->setLangId(1);
 		$allCats = $mainCategories->returnAllMainCategories();
 
@@ -101,7 +101,7 @@ if (!isset($_POST["save"])) {
 
 		$category_type_options = '';
 
-		$category_types = new category();
+		$category_types = new c8_category();
 		$category_types = $category_types->returnAllSections();
 
 		foreach ($category_types as $item) {
@@ -159,7 +159,7 @@ if (!isset($_POST["save"])) {
 	}
 } else {
 
-	$category = new category();
+	$category = new c8_category();
 
 	$category->setId($id);
 	$category->setContent($_POST["name"], $_POST["description"]);

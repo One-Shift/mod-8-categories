@@ -38,7 +38,7 @@ if (!isset($_POST["save"])) {
 	/*------------------------------------------*/
 
 	function recursiveWayGet($id, $i = 0, &$data = []) {
-		$a = new category();
+		$a = new c8_category();
 		$a->setLangId(1);
 		$a->setParentId($id);
 		$a = $a->returnChildCategories();
@@ -79,7 +79,7 @@ if (!isset($_POST["save"])) {
 
 	$category_type_options = null;
 
-	$category_types = new category();
+	$category_types = new c8_category();
 	$category_types = $category_types->returnAllSections();
 
 	foreach ($category_types as $item) {
@@ -130,7 +130,7 @@ if (!isset($_POST["save"])) {
 		bo3::mdl_load("templates/add.tpl")
 	);
 } else {
-	$category = new category();
+	$category = new c8_category();
 
 	$category->setContent($_POST["name"], $_POST["description"]);
 	$category->setCategorySection($_POST["category-type"]);

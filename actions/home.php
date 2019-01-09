@@ -1,6 +1,6 @@
 <?php
 
-$cat_obj = new category();
+$cat_obj = new c8_category();
 $cat_obj->setLangId($lg);
 $categories = $cat_obj->returnAllMainCategories();
 

@@ -7,7 +7,7 @@ function update ($id) {
 		"object" => []
 	];
 
-	$category = new category();
+	$category = new c8_category();
 	$category->setId($id);
 
 	$toReturn["status"] = $category->updatePublished();

@@ -3,11 +3,11 @@
 	if(isset($id) && !empty($id)) {
 
 		// Return all category info
-		$category_obj = new category();
+		$category_obj = new c8_category();
 		$category_obj->setId($id);
 		$category_result = $category_obj->returnNrChildsCategory();
 		$textToPrint = null;
-		
+
 		if (isset($_POST["submit"])) {
 			if($category_result->nr_sub_cats == 0) {
 				if($category_obj->delete()) {
