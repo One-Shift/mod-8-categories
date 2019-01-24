@@ -14,7 +14,7 @@ foreach ($categories as $category) {
 			'title' => $category->title,
 			'category-section' => $category->category_section,
 			'parent-nr' => $category->nr_sub_cats,
-			'published' => $category->published,
+			'published' => ($category->published) ? "checked" : "",
 			'date-created' => $category->date,
 			'date-updated-label' => $mdl_lang["label"]["date-updated"],
 			'date-updated' => $category->date_update,
