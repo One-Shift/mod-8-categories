@@ -12,9 +12,8 @@
 			</div>
 			<div class="form-group tacenter">
 				<button type="submit" class="btn btn-success" name="submitInstall">{c2r-lg-yes}</button>
-				<a href="{c2r-path-bo}/{c2r-lg}/home/" type="button" class="btn btn-danger">{c2r-lg-no}</a>
+				<a href="{c2r-bo-path}/{c2r-lg}/5-home/" type="button" class="btn btn-danger">{c2r-lg-no}</a>
 			</div>
 		</form>
 	</div>
 </div>
-

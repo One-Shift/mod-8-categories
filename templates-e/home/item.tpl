@@ -1,5 +1,5 @@
 <div class="line row">
-	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-9 d-flex">
+	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 d-flex">
 		<div class="row flex-grow-1">
 			<div class="box id col-sm-4 col-md-4 col-lg-1">
 				<p><strong>{c2r-id}</strong></p>
@@ -24,15 +24,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="action-list col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-		<a href="{c2r-path-bo}/{c2r-lg}/8-categories/view/{c2r-id}" class="btn btn-view {c2r-hide-but}" role="button">
+	<div class="action-list col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+		<a href="{c2r-mdl-url}view/{c2r-id}" class="btn btn-action btn-view {c2r-hide-but}" role="button">
 			<i class="fas fa-eye" aria-hidden="true"></i>
+			{c2r-but-view}
 		</a>
-        <a href="{c2r-path-bo}/{c2r-lg}/8-categories/edit/{c2r-id}" class="btn btn-edit" role="button">
+        <a href="{c2r-mdl-url}edit/{c2r-id}" class="btn btn-action btn-edit" role="button">
 			<i class="fas fa-edit" aria-hidden="true"></i>
+			{c2r-but-edit}
 		</a>
-        <a href="{c2r-path-bo}/{c2r-lg}/8-categories/delete/{c2r-id}" class="btn btn-del {c2r-show-but}" role="button">
+        <a href="{c2r-mdl-url}delete/{c2r-id}" class="btn btn-action btn-del {c2r-show-but}" role="button">
 			<i class="fas fa-trash" aria-hidden="true"></i>
+			{c2r-but-delete}
 		</a>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-<?phphidden
+<?php
 
 $cat_obj = new c8_category();
 $cat_obj->setLangId($lg);

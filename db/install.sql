@@ -20,11 +20,22 @@ CREATE TABLE `{c2r-prefix}_8_categories_lang` (
 	`text` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE  `{c2r-prefix}_8_categories_rel` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT ,
+	`category_id` INT(11) NOT NULL ,
+	`object_id` INT(11) NOT NULL ,
+	`module` VARCHAR(255) NOT NULL ,
+	`date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	`date_update` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = MyISAM DEFAULT CHARSET=utf8;
 
 ALTER TABLE `{c2r-prefix}_8_categories`
 	ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `{c2r-prefix}_8_categories_lang`
+	ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `{c2r-prefix}_8_categories_rel`
 	ADD PRIMARY KEY (`id`);
 
 
@@ -32,5 +43,8 @@ ALTER TABLE `{c2r-prefix}_8_categories`
 	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `{c2r-prefix}_8_categories_lang`
+	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{c2r-prefix}_8_categories_rel`
 	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;

@@ -1,17 +1,8 @@
-<style>
-.btn-lang.active {
-	color: #28a745 !important;
-	border: 1px solid #28a745 !important;
-	background-color: #fff !important;
-	outline: 0 !important;
-	box-shadow: none !important;
-}
-</style>
 <form name="add-category" action="" method="post">
 	<div class="row">
 		<div class="col-8 col-sm-8 col-md-8 col-lg-9 col-xl-9 float-left">
 			<!-- Category Name & Text -->
-			<div>
+			<div class="content-tabs">
 				{c2r-tabs-categories-name-description}
 			</div>
 			<!-- END Category Name & Text -->
@@ -21,7 +12,7 @@
 			<div class="spacer all-15"></div>
 			<div class="form-group">
 				<label for="inputType">{c2r-type}</label>
-				<input list="category-type" name="category-type" class="form-control" type="text" placeholder="{c2r-select-option-type}" id="inputType" required>
+				<input list="category-type" name="category-type" class="bo3-form-control form-control" type="text" placeholder="{c2r-select-option-type}" id="inputType" required>
 				<datalist id="category-type">
 					{c2r-category-type-options}
 				</datalist>
@@ -31,7 +22,7 @@
 			<!-- Category Parent -->
 			<div class="form-group">
 				<label for="inputParent">{c2r-parent}</label>
-				<select name="category-parent" id="inputParent" class="form-control">
+				<select name="category-parent" id="inputParent" class="bo3-form-control form-control">
 					<option value="-1" disabled selected>{c2r-select-option-parent}</option>
 					<option value="-1">{c2r-select-option-parent-no}</option>
 					{c2r-parent-options}
@@ -42,32 +33,33 @@
 			<!-- Category Date -->
 			<div class="form-group">
 				<label for="inputDate">{c2r-date}</label>
-				<input name="date" type="text" class="form-control" id="inputDate" placeholder="{c2r-date-placeholder}" value="{c2r-date-value}">
+				<input name="date" type="text" class="bo3-form-control form-control" id="inputDate" placeholder="{c2r-date-placeholder}" value="{c2r-date-value}">
 			</div>
 			<!-- END Category Date -->
 			<div class="spacer all-15"></div>
 			<!-- Category Sort -->
 			<div class="form-group">
 				<label for="inputSort">{c2r-sort}</label>
-				<input name="sort" id="inputSort" type="number" class="form-control" placeholder="{c2r-sort-placeholder}" value="0" required>
+				<input name="sort" id="inputSort" type="number" class="bo3-form-control form-control" placeholder="{c2r-sort-placeholder}" value="0" required>
 			</div>
 			<!-- END Category Sort -->
 			<div class="spacer all-15"></div>
 			<!-- Category Code -->
 			<div class="form-group">
 				<label for="inputCode">{c2r-code}</label>
-				<textarea name="code" id="inputCode" class="form-control" rows="1"  placeholder="{c2r-code-placeholder}" style="resize: vertical;"></textarea>
+				<textarea name="code" id="inputCode" class="bo3-form-control form-control" rows="1"  placeholder="{c2r-code-placeholder}" style="resize: vertical;"></textarea>
 			</div>
 			<!-- END Category Code -->
 			<div class="spacer all-15"></div>
 			<!-- Category Published -->
-			<div class="checkbox">
-				<label><input type="checkbox" name="published" value="1"/> {c2r-published}</label>
+			<div class="bo3-form-control custom-control custom-checkbox">
+				<input type="checkbox" id="inputPublished" class="custom-control-input" name="published" {c2r-published-checked} value="1"/>
+				<label class="custom-control-label" for="inputPublished">{c2r-published}</label>
 			</div>
 			<!-- END Category Published -->
 			<div class="spacer all-15"></div>
 			<div class="form-group">
-				<input name="files-fallback" id="files-fallback" type="text" class="form-control">
+				<input name="files-fallback" id="files-fallback" type="text" class="bo3-form-control form-control">
 			</div>
 		</div>
 	</div>
