@@ -85,8 +85,8 @@ class c8_category {
 					$cfg->db->prefix,
 					$this->id,
 					$i+1,
-					$this->title_arr[$i],
-					$this->description_arr[$i]
+					$db->real_escape_string($this->title_arr[$i]),
+					$db->real_escape_string($this->description_arr[$i])
 				);
 
 				$db->query($query[1]);
@@ -122,8 +122,8 @@ class c8_category {
 				if($lg[0]){
 					$query[$index] = sprintf("UPDATE %s_8_categories_lang SET title = '%s', text = '%s' WHERE category_id = '%s' AND lang_id = '%s'",
 						$cfg->db->prefix,
-						$this->title_arr[$index-1],
-						$this->description_arr[$index-1],
+						$db->real_escape_string($this->title_arr[$index-1]),
+						$db->real_escape_string($this->description_arr[$index-1]),
 						$this->id,
 						$index
 					);
@@ -144,20 +144,86 @@ class c8_category {
 	public function delete() {
 		global $cfg, $db;
 
-		$query = sprintf("DELETE c, cl
-			FROM %s_8_categories c
-				JOIN %s_8_categories_lang cl on cl.category_id = c.id
-			WHERE c.id = %s",
-				$cfg->db->prefix,
-				$cfg->db->prefix,
-				$this->id
-		);
+		$category = new c8_category();
+		$category->setId($this->id);
+		$category_obj = $category->returnOneCategoryAllLanguages();
 
-		return $db->query($query);
+		$category_rel = $category->returnCategoryRel();
+
+		if(count($category_rel) > 0 && is_array($category_rel)) {
+			foreach ($category_obj as $o => $obj) {
+				$obj->category_rel = $category_rel;
+			}
+		}
+
+		$trash = new trash();
+		$trash->setCode(json_encode($category_obj));
+		$trash->setDate();
+		$trash->setModule($cfg->mdl->folder);
+		$trash->setUser($authData["id"]);
+
+		if($trash->insert()) {
+			$query = sprintf("DELETE c, cl
+				FROM %s_8_categories c
+					INNER JOIN %s_8_categories_lang cl on cl.category_id = c.id
+				WHERE c.id = %s",
+					$cfg->db->prefix,
+					$cfg->db->prefix,
+					$this->id
+			);
+
+			if(count($category_rel) > 0 && is_array($category_rel)) {
+				$query_del = sprintf("DELETE FROM %s_8_categories_rel WHERE category_id = %s",
+					$cfg->db->prefix, $this->id
+				);
+
+				if($db->query($query) && $db->query($query_del)) {
+					return ($category->returnOneCategoryAllLanguages() == FALSE) ? TRUE : FALSE;
+				}
+			}
+
+			if($db->query($query)) {
+				return ($category->returnOneCategoryAllLanguages() == FALSE) ? TRUE : FALSE;
+			}
+		}
+
+		return FALSE;
 	}
 
 	public function returnObject() {
 		return get_object_vars($this);
+	}
+
+	public static function checkRel($id = null) {
+		global $cfg, $db;
+
+		if(isset($id)) {
+			$query = sprintf("SELECT * FROM %s_8_categories_rel WHERE category_id = '%s'", $cfg->db->prefix, $id);
+
+			$source = $db->query($query);
+
+			return $source->num_rows;
+		}
+
+		return FALSE;
+	}
+
+	public function returnCategoryRel() {
+		global $cfg, $db;
+
+		$query = sprintf("SELECT * FROM %s_8_categories_rel WHERE category_id = %s", $cfg->db->prefix, $this->id);
+
+		$source = $db->query($query);
+
+		$toReturn = [];
+
+		if($source->num_rows > 0) {
+			while ($data = $source->fetch_object()) {
+				array_push($toReturn, $data);
+			}
+		}
+
+		return $toReturn;
 	}
 
 	// Returns one categorie in one language need category id and lang id. $this->id, $this->lang_id
@@ -319,4 +385,3 @@ class c8_category {
 	}
 
 }
-

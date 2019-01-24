@@ -27,6 +27,10 @@ foreach ($categories as $category) {
 	);
 }
 
+if(empty($table_items)) {
+	$message = bo3::c2r(["message" => $mdl_lang["message"]["empty"]], bo3::mdl_load("templates/message.tpl"));
+} 
+
 $mdl = bo3::c2r(
 	[
 		'label-add-category' => $mdl_lang["label"]["add-category"],
@@ -35,7 +39,7 @@ $mdl = bo3::c2r(
 		'parent-nr' => $mdl_lang["label"]["parent-nr"],
 		'published' => $mdl_lang["label"]["published"],
 		'date' => $mdl_lang["label"]["date"],
-		'list' => (!empty($table_items)) ? $table_items : "No results to show"
+		'list' => (!empty($table_items)) ? $table_items : $message
 	],
 	bo3::mdl_load("templates/home.tpl")
 );

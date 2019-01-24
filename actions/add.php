@@ -26,8 +26,9 @@ if (!isset($_POST["save"])) {
 					'nr' => $index,
 					'label-name' => $mdl_lang["label"]["name"],
 					'label-description' => $mdl_lang["label"]["description"],
-					'place-holder-name' => "",
-					'place-holder-text' => ""
+					'placeholder-name' => $mdl_lang["label"]["placeholder-name"],
+					'placeholder-text' => $mdl_lang["label"]["placeholder-description"],
+					"lang-name" => $lg[2]
 				],
 				$nav_content_tpl
 			);
@@ -146,6 +147,7 @@ if (!isset($_POST["save"])) {
 
 	if ($category->insert()) {
 		$textToPrint = $mdl_lang["add"]["success"];
+		$status = TRUE;
 
 		$obj = $category->returnObject();
 
@@ -155,9 +157,18 @@ if (!isset($_POST["save"])) {
 		}
 	} else {
 		$textToPrint = $mdl_lang["add"]["failure"];
+		$status = FALSE;
 	}
 
-	$mdl = bo3::c2r(["content" => (isset($textToPrint)) ? $textToPrint : ""], bo3::mdl_load("templates/result.tpl"));
+	$mdl = bo3::c2r([
+		"content" => (isset($textToPrint)) ? $textToPrint : "",
+		"back-list" => $mdl_lang["result"]["back-list"],
+		"new-article" => $mdl_lang["result"]["new-category"],
+		"edit-mode" => $mdl_lang["result"]["edit-mode"],
+		"add-active" => $a != "add" ? "d-none" : "",
+		"edit-active" => $a != "edit" ? "d-none" : "",
+		"status" => ($status == TRUE) ? "success" : "danger"
+	], bo3::mdl_load("templates/result.tpl"));
 }
 
 bo3::importPlg ("files", ["module" => "category"]);

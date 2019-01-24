@@ -15,12 +15,12 @@ if (!isset($_POST["save"])) {
 		$category_result = $category_obj->returnOneCategoryAllLanguages();
 
 		$i = 0;
+
 		foreach ($cfg->lg as $index => $lg) {
 			if ($lg[0]) {
-
 				$tabs .= bo3::c2r(
 					[
-						'class' => ($i == 0 ? "active" : null),
+						'class' => ($i == 0) ? "active" : null,
 						'nr' => $index,
 						'lang-name' => $lg[2]
 					],
@@ -173,12 +173,23 @@ if (!isset($_POST["save"])) {
 
 	$textToPrint = '';
 	if ($category->update()) {
-		$textToPrint = $mdl_lang["add"]["success"];
+		$textToPrint = $mdl_lang["edit"]["success"];
+		$status = TRUE;
 	} else {
-		$textToPrint = $mdl_lang["add"]["failure"];
+		$textToPrint = $mdl_lang["edit"]["failure"];
+		$status = FALSE;
 	}
 
-	$mdl = bo3::c2r(["content" => (isset($textToPrint)) ? $textToPrint : ""], bo3::mdl_load("templates/result.tpl"));
+	$mdl = bo3::c2r([
+		"content" => (isset($textToPrint)) ? $textToPrint : "",
+		"back-list" => $mdl_lang["result"]["back-list"],
+		"new-article" => $mdl_lang["result"]["new-category"],
+		"edit-mode" => $mdl_lang["result"]["edit-mode"],
+		"add-active" => $a != "add" ? "d-none" : "",
+		"edit-active" => $a != "edit" ? "d-none" : "",
+		"id" => $id,
+		"status" => ($status == TRUE) ? "success" : "danger"
+	], bo3::mdl_load("templates/result.tpl"));
 }
 
 bo3::importPlg ("files", ["id" => $id, "module" => "category"]);
