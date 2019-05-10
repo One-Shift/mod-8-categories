@@ -29,7 +29,7 @@ foreach ($categories as $category) {
 
 if(empty($table_items)) {
 	$message = bo3::c2r(["message" => $mdl_lang["message"]["empty"]], bo3::mdl_load("templates/message.tpl"));
-} 
+}
 
 $mdl = bo3::c2r(
 	[

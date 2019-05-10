@@ -13,7 +13,7 @@ if (!isset($_POST["save"])) {
 		if ($lg[0]) {
 			$tabs .= bo3::c2r(
 				[
-					'class' => ($i == 0 ? "active" : null),
+					'class' => ($i == 0 ? "show active" : null),
 					'nr' => $index,
 					'lang-name' => $lg[2]
 				],
@@ -22,10 +22,12 @@ if (!isset($_POST["save"])) {
 
 			$nav_content .= bo3::c2r(
 				[
-					'class' => ($i == 0 ? "active" : null),
+					'class' => ($i == 0 ? "show active" : null),
 					'nr' => $index,
 					'label-name' => $mdl_lang["label"]["name"],
-					'label-description' => $mdl_lang["label"]["description"],
+					'label-content' => $mdl_lang["label"]["content"],
+					'label-meta-keywords' => $mdl_lang["label"]["meta-keywords"],
+					'label-meta-description' => $mdl_lang["label"]["meta-description"],
 					'placeholder-name' => $mdl_lang["label"]["placeholder-name"],
 					'placeholder-text' => $mdl_lang["label"]["placeholder-description"],
 					"lang-name" => $lg[2]
@@ -133,7 +135,7 @@ if (!isset($_POST["save"])) {
 } else {
 	$category = new c8_category();
 
-	$category->setContent($_POST["name"], $_POST["description"]);
+	$category->setContent($_POST["name"], $_POST["content"], $_POST["meta-keywords"], $_POST["meta-description"]);
 	$category->setCategorySection($_POST["category-type"]);
 	$category->setParentId(isset($_POST["category-parent"]) ? $_POST["category-parent"] : '-1');
 	$category->setCode($_POST["code"]);

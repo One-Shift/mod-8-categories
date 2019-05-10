@@ -32,12 +32,16 @@ if (!isset($_POST["save"])) {
 						'class' => ($i == 0 ? "show active" : null),
 						'nr' => $index,
 						'label-name' => $mdl_lang["label"]["name"],
-						'label-description' => $mdl_lang["label"]["description"],
+						'label-content' => $mdl_lang["label"]["content"],
+						'label-meta-keywords' => $mdl_lang["label"]["meta-keywords"],
+						'label-meta-description' => $mdl_lang["label"]["meta-description"],
 						'place-holder-name' => "",
 						'place-holder-text' => "",
 
 						'name-value' => htmlspecialchars($category_result[$index]->title),
-						'description-value' => $category_result[$index]->text
+						'content-value' => $category_result[$index]->text,
+						'meta-keywords-value' => $category_result[$index]->{"meta-keywords"},
+						'meta-description-value' => $category_result[$index]->{"meta-description"}
 					],
 					$nav_content_tpl
 				);
@@ -162,9 +166,9 @@ if (!isset($_POST["save"])) {
 	$category = new c8_category();
 
 	$category->setId($id);
-	$category->setContent($_POST["name"], $_POST["description"]);
+	$category->setContent($_POST["name"], $_POST["content"], $_POST["meta-keywords"], $_POST["meta-description"]);
 	$category->setCategorySection($_POST["category-type"]);
-	$category->setParentId($_POST["category-parent"]);
+	$category->setParentId(isset($_POST["category-parent"]) ? $_POST["category-parent"] : '-1');
 	$category->setCode($_POST["code"]);
 	$category->setDate($_POST["date"]);
 	$category->setDateUpdate();
