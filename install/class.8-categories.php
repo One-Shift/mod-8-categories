@@ -28,9 +28,11 @@ class c8_category {
 		$this->lang_id = $li;
 	}
 
-	public function setContent($t, $d) {
+	public function setContent($t, $c, $mk, $md) {
 		$this->title_arr = $t;
-		$this->description_arr = $d;
+		$this->content_arr = $c;
+		$this->meta_keywords = $mk;
+		$this->meta_description = $md;
 	}
 
 	public function setCode($c) {
@@ -81,12 +83,14 @@ class c8_category {
 			$this->id = $db->insert_id;
 
 			foreach ($this->title_arr as $i => $item) {
-				$query[1] = sprintf("INSERT INTO %s_8_categories_lang (category_id, lang_id, title, text) VALUES (%s, %s, '%s', '%s')",
+				$query[1] = sprintf("INSERT INTO %s_8_categories_lang (category_id, lang_id, title, text, `meta-keywords`, `meta-description`) VALUES (%s, %s, '%s', '%s', '%s', '%s')",
 					$cfg->db->prefix,
 					$this->id,
 					$i+1,
 					$db->real_escape_string($this->title_arr[$i]),
-					$db->real_escape_string($this->description_arr[$i])
+					$db->real_escape_string($this->content_arr[$i]),
+					$db->real_escape_string($this->meta_keywords[$i]),
+					$db->real_escape_string($this->meta_description[$i])
 				);
 
 				$db->query($query[1]);
@@ -120,10 +124,12 @@ class c8_category {
 
 			foreach ($cfg->lg as $index=>$lg) {
 				if($lg[0]){
-					$query[$index] = sprintf("UPDATE %s_8_categories_lang SET title = '%s', text = '%s' WHERE category_id = '%s' AND lang_id = '%s'",
+					$query[$index] = sprintf("UPDATE %s_8_categories_lang SET title = '%s', text = '%s', `meta-keywords` = '%s', `meta-description` = '%s' WHERE category_id = '%s' AND lang_id = '%s'",
 						$cfg->db->prefix,
 						$db->real_escape_string($this->title_arr[$index-1]),
-						$db->real_escape_string($this->description_arr[$index-1]),
+						$db->real_escape_string($this->content_arr[$index-1]),
+						$db->real_escape_string($this->meta_keywords[$index-1]),
+						$db->real_escape_string($this->meta_description[$index-1]),
 						$this->id,
 						$index
 					);
@@ -230,7 +236,7 @@ class c8_category {
 	public function returnOneCategory() {
 		global $cfg, $db;
 
-		$query = sprintf("SELECT bc.*, bcl.title, bcl.text
+		$query = sprintf("SELECT bc.*, bcl.title, bcl.text, bcl.`meta-keywords`, bcl.`meta-description`
 			FROM %s_8_categories bc
 				INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 			WHERE bc.id = %s and bcl.lang_id = %s",
@@ -248,7 +254,7 @@ class c8_category {
 	public function returnOneCategoryAllLanguages() {
 		global $cfg, $db;
 
-		$query = sprintf("SELECT bc.*, bcl.title, bcl.text, bcl.lang_id
+		$query = sprintf("SELECT bc.*, bcl.title, bcl.text, bcl.`meta-keywords`, bcl.`meta-description`, bcl.lang_id
 			FROM %s_8_categories bc
 				INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 			WHERE bc.id = %s",
@@ -294,7 +300,7 @@ class c8_category {
 	public function returnAllMainCategories() {
 		global $cfg, $db;
 
-		$query = sprintf("SELECT bc.*, bcl.title, bcl.text, (SELECT COUNT(id) FROM %s_8_categories WHERE parent_id = bc.id) AS 'nr_sub_cats'
+		$query = sprintf("SELECT bc.*, bcl.title, bcl.text, bcl.`meta-keywords`, bcl.`meta-description`, (SELECT COUNT(id) FROM %s_8_categories WHERE parent_id = bc.id) AS 'nr_sub_cats'
 			FROM %s_8_categories bc
 				INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 			WHERE bc.parent_id = -1 AND bcl.lang_id = %s
@@ -318,7 +324,7 @@ class c8_category {
 	public function returnChildCategories() {
 		global $cfg, $db;
 
-		$query = sprintf("SELECT bc.*, bcl.title, bcl.text, (SELECT COUNT(id) FROM %s_8_categories WHERE parent_id = bc.id) AS 'nr_sub_cats'
+		$query = sprintf("SELECT bc.*, bcl.title, bcl.text, bcl.`meta-keywords`, bcl.`meta-description`, (SELECT COUNT(id) FROM %s_8_categories WHERE parent_id = bc.id) AS 'nr_sub_cats'
 			FROM %s_8_categories bc
 				INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 			WHERE bc.parent_id = %s AND bcl.lang_id = %s
