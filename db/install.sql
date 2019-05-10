@@ -21,7 +21,7 @@ CREATE TABLE `{c2r-prefix}_8_categories_lang` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `{c2r-prefix}_8_categories_rel` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT ,
+	`id` INT(11) NOT NULL ,
 	`category_id` INT(11) NOT NULL ,
 	`object_id` INT(11) NOT NULL ,
 	`module` VARCHAR(255) NOT NULL ,
