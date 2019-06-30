@@ -304,7 +304,7 @@ class c8_category {
 			FROM %s_8_categories bc
 				INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 			WHERE bc.parent_id = -1 AND bcl.lang_id = %s
-			ORDER BY bc.category_section ASC, bcl.title ASC",
+			ORDER BY bc.sort ASC, bc.category_section ASC, bcl.title ASC",
 			$cfg->db->prefix, $cfg->db->prefix, $cfg->db->prefix, $this->lang_id
 		);
 
@@ -328,7 +328,7 @@ class c8_category {
 			FROM %s_8_categories bc
 				INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 			WHERE bc.parent_id = %s AND bcl.lang_id = %s
-			ORDER BY bc.category_section ASC, bcl.title ASC",
+			ORDER BY bc.sort ASC, bc.category_section ASC, bcl.title ASC",
 			$cfg->db->prefix, $cfg->db->prefix, $cfg->db->prefix, $this->parent_id, $this->lang_id
 		);
 
@@ -352,7 +352,7 @@ class c8_category {
 			FROM %s_8_categories bc
 				INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 			WHERE bcl.lang_id = %s
-			ORDER BY bc.category_section ASC, bcl.title ASC",
+			ORDER BY bc.sort ASC, bc.category_section ASC, bcl.title ASC",
 			$cfg->db->prefix, $cfg->db->prefix, $this->lang_id
 		);
 
