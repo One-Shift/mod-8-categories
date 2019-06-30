@@ -19,6 +19,9 @@
 					<span class="slider round" data-id="{c2r-id}"></span>
 				</label>
 			</div>
+			<div class="box col-sm-4 col-md-4 col-lg-1 text sort">
+				<p>{c2r-sort}</p>
+			</div>
 			<div class="box date col-sm-4 col-md-4 col-lg-2">
 				<p title="{c2r-date-updated-label} : {c2r-date-updated}">{c2r-date-created}</p>
 			</div>

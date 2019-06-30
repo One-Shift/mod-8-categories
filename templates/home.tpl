@@ -28,6 +28,9 @@
 					<div class="block col-sm-2 tacenter">
 						<strong>{c2r-published}</strong>
 					</div>
+					<div class="block col-sm-1 tacenter">
+						<strong>{c2r-sort}</strong>
+					</div>
 					<div class="block col-sm-2 tacenter">
 						<strong>{c2r-date}</strong>
 					</div>
