@@ -5,7 +5,7 @@
 	<td>{c2r-parent-nr}</td>
 	<td>
 		<label class="switch switch-default switch-success mr-2">
-			<input type="checkbox" class="switch-input" {c2r-published}>
+			<input type="checkbox" class="switch-input" {c2r-published} disabled="disabled">
 			<span class="switch-label"></span>
 			<span class="switch-handle"></span>
 		</label>
