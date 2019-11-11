@@ -18,33 +18,27 @@ if (!isset($_POST["save"])) {
 
 		foreach ($cfg->lg as $index => $lg) {
 			if ($lg[0]) {
-				$tabs .= bo3::c2r(
-					[
-						'class' => ($i == 0) ? "active" : null,
-						'nr' => $index,
-						'lang-name' => $lg[2]
-					],
-					$nav_tpl
-				);
+				$tabs .= bo3::c2r([
+					'class' => ($i == 0) ? "active" : null,
+					'nr' => $index,
+					'lang-name' => $lg[2]
+				], $nav_tpl);
 
-				$nav_content .= bo3::c2r(
-					[
-						'class' => ($i == 0 ? "show active" : null),
-						'nr' => $index,
-						'label-name' => $mdl_lang["label"]["name"],
-						'label-content' => $mdl_lang["label"]["content"],
-						'label-meta-keywords' => $mdl_lang["label"]["meta-keywords"],
-						'label-meta-description' => $mdl_lang["label"]["meta-description"],
-						'place-holder-name' => "",
-						'place-holder-text' => "",
+				$nav_content .= bo3::c2r([
+					'class' => ($i == 0 ? "show active" : null),
+					'nr' => $index,
+					'label-name' => $mdl_lang["label"]["name"],
+					'label-content' => $mdl_lang["label"]["content"],
+					'label-meta-keywords' => $mdl_lang["label"]["meta-keywords"],
+					'label-meta-description' => $mdl_lang["label"]["meta-description"],
+					'place-holder-name' => "",
+					'place-holder-text' => "",
 
-						'name-value' => htmlspecialchars($category_result[$index]->title),
-						'content-value' => $category_result[$index]->text,
-						'meta-keywords-value' => $category_result[$index]->{"meta-keywords"},
-						'meta-description-value' => $category_result[$index]->{"meta-description"}
-					],
-					$nav_content_tpl
-				);
+					'name-value' => htmlspecialchars($category_result[$index]->title),
+					'content-value' => $category_result[$index]->text,
+					'meta-keywords-value' => $category_result[$index]->{"meta-keywords"},
+					'meta-description-value' => $category_result[$index]->{"meta-description"}
+				], $nav_content_tpl);
 				$i++;
 			}
 		}
@@ -66,14 +60,11 @@ if (!isset($_POST["save"])) {
 
 			foreach ($a as $item) {
 				if ($item->id != $id) {
-					$parent_options .= bo3::c2r(
-						[
-							'option-id' => $item->id,
-							'option' => sprintf("%s> %s", str_repeat("-", $i), $item->title),
-							'selected' => $item->id == $category_result[1]->parent_id ? "selected" : ""
-						],
-						$option_item_tpl
-					);
+					$parent_options .= bo3::c2r([
+						'option-id' => $item->id,
+						'option' => sprintf("%s> %s", str_repeat("-", $i), $item->title),
+						'selected' => $item->id == $category_result[1]->parent_id ? "selected" : ""
+					], $option_item_tpl);
 				}
 
 				if ($item->nr_sub_cats > 0) {
@@ -89,14 +80,11 @@ if (!isset($_POST["save"])) {
 		$parent_options = '';
 		foreach ($allCats as $item) {
 			if ($item->id != $id) {
-				$parent_options .= bo3::c2r(
-					[
-						'option-id' => $item->id,
-						'option' => $item->title,
-						'selected' => $item->id == $category_result[1]->parent_id ? "selected" : ""
-					],
-					$option_item_tpl
-				);
+				$parent_options .= bo3::c2r([
+					'option-id' => $item->id,
+					'option' => $item->title,
+					'selected' => $item->id == $category_result[1]->parent_id ? "selected" : ""
+				], $option_item_tpl);
 			}
 			recursiveWayGet($item->id, 0);
 		}
@@ -110,53 +98,40 @@ if (!isset($_POST["save"])) {
 
 		foreach ($category_types as $item) {
 
-			$category_type_options .= bo3::c2r(
-				[
-					'option-id' => $item->category_section,
-					'option' => ""
-				],
-				$option_item_tpl
-			);
+			$category_type_options .= bo3::c2r([
+				'option-id' => $item->category_section,
+				'option' => ""
+			], $option_item_tpl);
 		}
 
-		$mdl = bo3::c2r(
-			[
-				'content' => bo3::c2r(
-					[
-						'tabs-categories-name-description' => bo3::c2r(
-							[
-								'nav-tabs-items' => $tabs,
-								'tab-content-items' => $nav_content
-							],
-							bo3::mdl_load("templates-e/edit/tabs.tpl")
-						),
-						'type' => $mdl_lang["label"]["type"],
-						'select-option-type' => $mdl_lang["form"]["option-type"],
-						'category-type-options' => $category_type_options,
-						'type-value' => $category_result[1]->category_section,
-						'parent' => $mdl_lang["label"]["parent"],
-						'select-option-parent' => $mdl_lang["form"]["option-parent"],
-						'select-option-parent-no' => $mdl_lang["form"]["option-parent-no"],
-						'selected' => $category_result[1]->parent_id == -1 ? "selected" : "",
-						'parent-options' => $parent_options,
-						'date' => $mdl_lang["label"]["date"],
-						'date-placeholder' => $mdl_lang["form"]["date-placeholder"],
-						'date-value' => $category_result[1]->date,
-						'code' => $mdl_lang["label"]["code"],
-						'code-placeholder' => $mdl_lang["label"]["code-placeholder"],
-						'code-value' => $category_result[1]->code,
-						'sort' => $mdl_lang["label"]["sort"],
-						'sort-placeholder' => $mdl_lang["label"]["sort-placeholder"],
-						'sort-value' => $category_result[1]->sort,
-						'published' => $mdl_lang["label"]["published"],
-						'published-checked' => $category_result[1]->published ? "checked" : '',
-						'but-submit' => $mdl_lang["label"]["but-submit"]
-					],
-					bo3::mdl_load("templates-e/edit/form.tpl")
-				)
-			],
-			bo3::mdl_load("templates/add.tpl")
-		);
+		$mdl = bo3::c2r([
+			'tabs-categories-name-description' => bo3::c2r([
+				'nav-tabs-items' => $tabs,
+				'tab-content-items' => $nav_content
+			], bo3::mdl_load("templates-e/edit/tabs.tpl")),
+			'type' => $mdl_lang["label"]["type"],
+			'select-option-type' => $mdl_lang["form"]["option-type"],
+			'category-type-options' => $category_type_options,
+			'type-value' => $category_result[1]->category_section,
+			'parent' => $mdl_lang["label"]["parent"],
+			'select-option-parent' => $mdl_lang["form"]["option-parent"],
+			'select-option-parent-no' => $mdl_lang["form"]["option-parent-no"],
+			'selected' => $category_result[1]->parent_id == -1 ? "selected" : "",
+			'parent-options' => $parent_options,
+			'date' => $mdl_lang["label"]["date"],
+			'date-placeholder' => $mdl_lang["form"]["date-placeholder"],
+			'date-value' => $category_result[1]->date,
+			'code' => $mdl_lang["label"]["code"],
+			'code-placeholder' => $mdl_lang["label"]["code-placeholder"],
+			'code-value' => $category_result[1]->code,
+			'sort' => $mdl_lang["label"]["sort"],
+			'sort-placeholder' => $mdl_lang["label"]["sort-placeholder"],
+			'sort-value' => $category_result[1]->sort,
+			'published' => $mdl_lang["label"]["published"],
+			'published-checked' => $category_result[1]->published ? "checked" : '',
+			'but-submit' => $mdl_lang["label"]["but-submit"]
+			// 'content' => bo3::c2r([], bo3::mdl_load("templates-e/edit/form.tpl"))
+		], bo3::mdl_load("templates/edit.tpl"));
 	} else {
 		// if doesn't exist an action response, system sent you to 404
 		header("Location: {$cfg->system->path_bo}/0/{$lg_s}/404/");
