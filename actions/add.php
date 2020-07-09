@@ -115,7 +115,7 @@ if (!isset($_POST["save"])) {
 	$category->setDateUpdate();
 	$category->setSort($_POST["sort"]);
 	$category->setPublished(isset($_POST["published"]) ? $_POST["published"] : 0);
-	$category->setUserId($authData["id"]);
+	$category->setUserId($authData->id);
 
 	$textToPrint = "";
 
