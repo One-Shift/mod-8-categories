@@ -3,18 +3,18 @@
 		<table class="table table-data2">
 			<thead>
 				<tr>
-					<th>{c2r-lg-id}</th>
-					<th>{c2r-lg-name}</th>
-					<th>{c2r-lg-section}</th>
-					<th>{c2r-lg-parent-nr}</th>
-					<th>{c2r-lg-published}</th>
-					<th>{c2r-lg-sort}</th>
-					<th>{c2r-lg-date}</th>
+					<th>{{ lg-id }}</th>
+					<th>{{ lg-name }}</th>
+					<th>{{ lg-section }}</th>
+					<th>{{ lg-parent-nr }}</th>
+					<th>{{ lg-published }}</th>
+					<th>{{ lg-sort }}</th>
+					<th>{{ lg-date }}</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				{c2r-list}
+				{{ list }}
 			</tbody>
 		</table>
 	</div>
