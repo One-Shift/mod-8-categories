@@ -1,7 +1,7 @@
 <?php
 
 $cat_obj = new c8_category();
-$cat_obj->setLangId($lg);
+$cat_obj->setLangId($lg_s);
 $categories = $cat_obj->returnAllMainCategories();
 
 foreach ($categories as $category) {

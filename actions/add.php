@@ -34,8 +34,10 @@ if (!isset($_POST["save"])) {
 	/*------------------------------------------*/
 
 	function recursiveWayGet($id, $i = 0, &$data = []) {
+		global $cfg; 
+		
 		$a = new c8_category();
-		$a->setLangId(1);
+		$a->setLangId($cfg->lg[1][1]);
 		$a->setParentId($id);
 		$a = $a->returnChildCategories();
 
@@ -112,7 +114,6 @@ if (!isset($_POST["save"])) {
 	$category->setParentId(isset($_POST["category-parent"]) ? $_POST["category-parent"] : '-1');
 	$category->setCode($_POST["code"]);
 	$category->setDate($_POST["date"]);
-	$category->setDateUpdate();
 	$category->setSort($_POST["sort"]);
 	$category->setPublished(isset($_POST["published"]) ? $_POST["published"] : 0);
 	$category->setUserId($authData->id);

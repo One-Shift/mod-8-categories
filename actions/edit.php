@@ -34,36 +34,36 @@ if (!isset($_POST["save"])) {
 					'place-holder-name' => "",
 					'place-holder-text' => "",
 
-					'name-value' => htmlspecialchars($category_result[$index]->title),
-					'content-value' => $category_result[$index]->text,
-					'meta-keywords-value' => $category_result[$index]->{"meta-keywords"},
-					'meta-description-value' => $category_result[$index]->{"meta-description"}
+					'name-value' => htmlspecialchars($category_result[$lg[1]]->title),
+					'content-value' => $category_result[$lg[1]]->text,
+					'meta-keywords-value' => $category_result[$lg[1]]->{"meta-keywords"},
+					'meta-description-value' => $category_result[$lg[1]]->{"meta-description"}
 				], $nav_content_tpl);
 				$i++;
 			}
 		}
 
 		$category = new c8_category();
-		$category->setLangId(1);
+		$category->setLangId($cfg->lg[1][1]);
 		$category = $category->returnAllCategories();
 
 		/*------------------------------------------*/
 
 		function recursiveWayGet($id, $i){
-			global $parent_options, $option_item_tpl, $category_result;
+			global $cfg, $parent_options, $option_item_tpl, $category_result, $id;
 
 			$a = new c8_category();
-			$a->setLangId(1);
+			$a->setLangId($cfg->lg[1][1]);
 			$a->setParentId($id);
 			$a = $a->returnChildCategories();
 			$i++;
 
 			foreach ($a as $item) {
-				if ($item->id != $id) {
+				if ($item->id !== $id) {
 					$parent_options .= bo3::c2r([
 						'option-id' => $item->id,
 						'option' => sprintf("%s> %s", str_repeat("-", $i), $item->title),
-						'selected' => $item->id == $category_result[1]->parent_id ? "selected" : ""
+						'selected' => $item->id == $category_result[$cfg->lg[1][1]]->parent_id ? "selected" : ""
 					], $option_item_tpl);
 				}
 
@@ -74,7 +74,7 @@ if (!isset($_POST["save"])) {
 		}
 
 		$mainCategories = new c8_category();
-		$mainCategories->setLangId(1);
+		$mainCategories->setLangId($cfg->lg[1][1]);
 		$allCats = $mainCategories->returnAllMainCategories();
 
 		$parent_options = '';
@@ -83,7 +83,7 @@ if (!isset($_POST["save"])) {
 				$parent_options .= bo3::c2r([
 					'option-id' => $item->id,
 					'option' => $item->title,
-					'selected' => $item->id == $category_result[1]->parent_id ? "selected" : ""
+					'selected' => $item->id == $category_result[$cfg->lg[1][1]]->parent_id ? "selected" : ""
 				], $option_item_tpl);
 			}
 			recursiveWayGet($item->id, 0);
@@ -112,23 +112,23 @@ if (!isset($_POST["save"])) {
 			'type' => $mdl_lang["label"]["type"],
 			'select-option-type' => $mdl_lang["form"]["option-type"],
 			'category-type-options' => $category_type_options,
-			'type-value' => $category_result[1]->category_section,
+			'type-value' => $category_result[$cfg->lg[1][1]]->category_section,
 			'parent' => $mdl_lang["label"]["parent"],
 			'select-option-parent' => $mdl_lang["form"]["option-parent"],
 			'select-option-parent-no' => $mdl_lang["form"]["option-parent-no"],
-			'selected' => $category_result[1]->parent_id == -1 ? "selected" : "",
+			'selected' => $category_result[$cfg->lg[1][1]]->parent_id == -1 ? "selected" : "",
 			'parent-options' => $parent_options,
 			'date' => $mdl_lang["label"]["date"],
 			'date-placeholder' => $mdl_lang["form"]["date-placeholder"],
-			'date-value' => $category_result[1]->date,
+			'date-value' => $category_result[$cfg->lg[1][1]]->date,
 			'code' => $mdl_lang["label"]["code"],
 			'code-placeholder' => $mdl_lang["label"]["code-placeholder"],
-			'code-value' => $category_result[1]->code,
+			'code-value' => $category_result[$cfg->lg[1][1]]->code,
 			'sort' => $mdl_lang["label"]["sort"],
 			'sort-placeholder' => $mdl_lang["label"]["sort-placeholder"],
-			'sort-value' => $category_result[1]->sort,
+			'sort-value' => $category_result[$cfg->lg[1][1]]->sort,
 			'published' => $mdl_lang["label"]["published"],
-			'published-checked' => $category_result[1]->published ? "checked" : '',
+			'published-checked' => $category_result[$cfg->lg[1][1]]->published ? "checked" : '',
 			'but-submit' => $mdl_lang["label"]["but-submit"]
 			// 'content' => bo3::c2r([], bo3::mdl_load("templates-e/edit/form.tpl"))
 		], bo3::mdl_load("templates/edit.tpl"));
@@ -146,7 +146,6 @@ if (!isset($_POST["save"])) {
 	$category->setParentId(isset($_POST["category-parent"]) ? $_POST["category-parent"] : '-1');
 	$category->setCode($_POST["code"]);
 	$category->setDate($_POST["date"]);
-	$category->setDateUpdate();
 	$category->setSort($_POST["sort"]);
 	$category->setPublished(isset($_POST["published"]) ? $_POST["published"] : 0);
 

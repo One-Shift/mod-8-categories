@@ -32,7 +32,7 @@
 			], bo3::mdl_load("templates/result.tpl"));
 
 		} else {
-			$category_obj->setLangId($lg);
+			$category_obj->setLangId($lg_s);
 			$category_info = $category_obj->returnOneCategory();
 
 			$rel_checker = c8_category::checkRel($id);

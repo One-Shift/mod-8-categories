@@ -1,6 +1,11 @@
-INSERT INTO `{{ prefix }}_modules` (`name`, `folder`, `code`) VALUES ('{{ mod-name }}', '{{ mod-folder }}', '{\r\n	\"fa-icon\": \"fa-list\",\r\n	\"img\": \"\",\r\n	\"sub-items\": {\r\n		\"List\": {\r\n			\"url\": \"\"\r\n		},\r\n		\"Add category\": {\r\n			\"url\": \"add\"\r\n		}\r\n	},\r\n\"sidebar\": true,\r\n\"dropdown\": false\r\n}');
+INSERT INTO `{{ prefix }}_modules` (`name`, `folder`, `code`, `icon`, `img`, `dropdown`, `sidebar`) VALUES ('{{ mod-name }}', '{{ mod-folder }}', '{\r\n	\"fa-icon\": \"fa-list\",\r\n	\"img\": \"\",\r\n	\"sub-items\": {\r\n		\"List\": {\r\n			\"url\": \"\"\r\n		},\r\n		\"Add category\": {\r\n			\"url\": \"add\"\r\n		}\r\n	},\r\n\"sidebar\": true,\r\n\"dropdown\": false\r\n}', 'fa-list', '', 0, 1);
 
-CREATE TABLE `{{ prefix }}_8_categories` (
+SET @last_id_in_table = LAST_INSERT_ID();
+
+INSERT INTO `{{ prefix }}_modules_lang` (`codename`, `name`, `link_title`, `lang_id`, `module_id`, `module_type`) VALUES ('categories', 'Categorias', 'Ver Categorias', 1, @last_id_in_table, 'main'), ('categories', 'Categories', 'See Categories', 2, @last_id_in_table, 'main'), ('list-categories', 'Lista', 'Ver Lista', 1, @last_id_in_table, 'sub'), ('list-categories', 'List', 'See List', 2, @last_id_in_table, 'sub'), ('add-categories', 'Adicionar', 'Adicionar Categorias', 1, @last_id_in_table, 'sub'), ('add-categories', 'Add', 'Add Categories', 2, @last_id_in_table, 'sub');
+
+INSERT INTO `{{ prefix }}_modules_submenu` (`name`, `link`, `module_ass`, `status`) VALUES ('list-categories', '', @last_id_in_table, 1), ('add-categories', 'add', @last_id_in_table, 1);
+
 	`id` int(11) NOT NULL,
 	`parent_id` int(11) NOT NULL,
 	`category_section` varchar(255) NOT NULL,
