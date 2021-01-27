@@ -6,6 +6,7 @@ INSERT INTO `{{ prefix }}_modules_lang` (`codename`, `name`, `link_title`, `lang
 
 INSERT INTO `{{ prefix }}_modules_submenu` (`name`, `link`, `module_ass`, `status`) VALUES ('list-categories', '', @last_id_in_table, 1), ('add-categories', 'add', @last_id_in_table, 1);
 
+CREATE TABLE `{{ prefix }}_8_categories` (
 	`id` int(11) NOT NULL,
 	`parent_id` int(11) NOT NULL,
 	`category_section` varchar(255) NOT NULL,
