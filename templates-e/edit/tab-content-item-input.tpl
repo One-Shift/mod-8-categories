@@ -2,7 +2,7 @@
 	<div class="spacer all-15"></div>
 	<div class="form-group">
 		<label for="inputName-{{ nr }}">{{ label-name }}</label>
-		<input type="text" class="form-control" id="inputName-{{ nr}" name="name[]" placeholder="{{ label-name}-{{ nr}" required="" value="{{ name-value}">
+		<input type="text" class="form-control" id="inputName-{{ nr }}" name="name[]" placeholder="{{ label-name }}-{{ nr }}" required="" value="{{ name-value }}">
 	</div>
 	<div class="spacer all-15"></div>
 	<div class="form-group">
