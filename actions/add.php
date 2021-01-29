@@ -12,13 +12,13 @@ if (!isset($_POST["save"])) {
 		if ($lg[0]) {
 			$tabs .= bo3::c2r([
 				'class' => ($i == 0 ? "show active" : null),
-				'nr' => $index,
+				'nr' => $lg[1],
 				'lang-name' => $lg[2]
 			], $nav_tpl);
 
 			$nav_content .= bo3::c2r([
 				'class' => ($i == 0 ? "show active" : null),
-				'nr' => $index,
+				'nr' => $lg[1],
 				'label-name' => $mdl_lang["label"]["name"],
 				'label-content' => $mdl_lang["label"]["content"],
 				'label-meta-keywords' => $mdl_lang["label"]["meta-keywords"],

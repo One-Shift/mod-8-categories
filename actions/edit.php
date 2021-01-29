@@ -20,7 +20,7 @@ if (!isset($_POST["save"])) {
 			if ($lg[0]) {
 				$tabs .= bo3::c2r([
 					'class' => ($i == 0) ? "active" : null,
-					'nr' => $index,
+					'nr' => $lg[1],
 					'lang-name' => $lg[2]
 				], $nav_tpl);
 
