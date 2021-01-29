@@ -185,7 +185,7 @@ class c8_category
 						$db->real_escape_string($this->meta_keywords[$index - 1]),
 						$db->real_escape_string($this->meta_description[$index - 1]),
 						$this->id,
-						$index
+						$cfg->lg[$index][1]
 					))) {
 						continue;
 					} else {
@@ -259,7 +259,7 @@ class c8_category
 		global $cfg, $db;
 
 		$source = $db->query(sprintf(
-			"SELECT bc.*, bcl.title, bcl.text, bcl.`meta-keywords`, bcl.`meta-description`
+			"SELECT bc.*, bcl.`title`, bcl.`text`, bcl.`meta-keywords`, bcl.`meta-description`
 				FROM %s_8_categories bc
 					INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
 				WHERE bc.id = %s and bcl.lang_id = '%s'",
