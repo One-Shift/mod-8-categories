@@ -55,7 +55,7 @@ class c8_category
 		$this->parent_id = $pi;
 	}
 
-	/** @param int **/
+	/** @param string **/
 	public function setLangId($li)
 	{
 		$this->lang_id = $li;
@@ -133,16 +133,16 @@ class c8_category
 
 			foreach ($this->title_arr as $i => $item) {
 				if ($db->query(sprintf(
-					"INSERT INTO %s_8_categories_lang (category_id, lang_id, title, text, `meta-keywords`, `meta-description`) VALUES (%d, %d, '%s', '%s', '%s', '%s')",
+					"INSERT INTO %s_8_categories_lang (category_id, lang_id, title, text, `meta-keywords`, `meta-description`) VALUES (%d, '%s', '%s', '%s', '%s', '%s')",
 					$cfg->db->prefix,
 					$this->id,
-					$i + 1,
+					$cfg->lg[$i + 1][1],
 					$db->real_escape_string($this->title_arr[$i]),
 					$db->real_escape_string($this->content_arr[$i]),
 					$db->real_escape_string($this->meta_keywords[$i]),
 					$db->real_escape_string($this->meta_description[$i])
 				))) {
-					if ($i == count($this->title_arr)) {
+					if ($i == count($this->title_arr) - 1) {
 						return TRUE;
 					} else {
 						continue;
@@ -262,7 +262,7 @@ class c8_category
 			"SELECT bc.*, bcl.title, bcl.text, bcl.`meta-keywords`, bcl.`meta-description`
 				FROM %s_8_categories bc
 					INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
-				WHERE bc.id = %s and bcl.lang_id = %s",
+				WHERE bc.id = %s and bcl.lang_id = '%s'",
 			$cfg->db->prefix,
 			$cfg->db->prefix,
 			$this->id,
@@ -386,7 +386,7 @@ class c8_category
 			"SELECT bcl.title, bc.id
 				FROM %s_8_categories bc
 					INNER JOIN %s_8_categories_lang AS bcl on bcl.category_id = bc.id
-				WHERE bcl.lang_id = %s
+				WHERE bcl.lang_id = '%s'
 				ORDER BY bc.sort ASC, bc.category_section ASC, bcl.title ASC",
 			$cfg->db->prefix,
 			$cfg->db->prefix,
