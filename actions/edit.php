@@ -26,7 +26,7 @@ if (!isset($_POST["save"])) {
 
 				$nav_content .= bo3::c2r([
 					'class' => ($i == 0 ? "show active" : null),
-					'nr' => $index,
+					'nr' => $lg[1],
 					'label-name' => $mdl_lang["label"]["name"],
 					'label-content' => $mdl_lang["label"]["content"],
 					'label-meta-keywords' => $mdl_lang["label"]["meta-keywords"],
@@ -150,6 +150,7 @@ if (!isset($_POST["save"])) {
 	$category->setPublished(isset($_POST["published"]) ? $_POST["published"] : 0);
 
 	$textToPrint = '';
+	
 	if ($category->update()) {
 		$textToPrint = $mdl_lang["edit"]["success"];
 		$status = TRUE;
