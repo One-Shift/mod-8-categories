@@ -118,15 +118,13 @@ class c8_category
 		global $cfg, $db, $authData;
 
 		if ($db->query(sprintf(
-			"INSERT INTO %s_8_categories (parent_id, category_section, code, sort, user_id, date, date_update, published) VALUES (%d, '%s', '%s', %d, %d, '%s', '%s', %d)",
+			"INSERT INTO %s_8_categories (parent_id, category_section, code, sort, user_id, published) VALUES (%d, '%s', '%s', %d, %d, %d)",
 			$cfg->db->prefix,
 			$this->parent_id,
 			$this->category_section,
 			$this->code,
 			$this->sort,
 			$authData->id,
-			$this->date,
-			$this->date_update,
 			$this->published
 		))) {
 			$this->id = $db->insert_id;
