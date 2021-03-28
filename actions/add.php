@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * @var stdClass $cfg
+ * @var stdClass $authData
+ * @var array $lang
+ * @var array $mdl_lang
+ * @var string $lg_s
+ * @var int $lg
+ * @var string $pg
+ * @var int $id
+ * @var string $a
+ */
+
 if (!isset($_POST["save"])) {
 	$nav_tpl = bo3::mdl_load("templates-e/add/nav-tab-item.tpl");
 	$nav_content_tpl = bo3::mdl_load("templates-e/add/tab-content-item-input.tpl");
